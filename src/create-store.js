@@ -1,9 +1,10 @@
 import clone from 'lodash.clonedeep'
+import deepFreeze from 'deep-freeze'
 
 export default (initialState, modelConstructor) => {
   let listeners = []
 
-  let state = clone(initialState)
+  let state = deepFreeze(clone(initialState))
 
   const model = modelConstructor(fn => { state = fn(state) })
 
@@ -18,7 +19,7 @@ export default (initialState, modelConstructor) => {
 
   return {
     ...types,
-    getState: () => clone(state),
+    getState: () => state,
     listen: listener => listeners.push(listener)
   }
 }
