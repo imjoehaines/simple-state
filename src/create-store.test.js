@@ -146,7 +146,7 @@ test('mutating previous versions of state does not mutate state returned by getS
   expect(stateAfter).toMatchObject({ amount: 2 })
 })
 
-test('mutating previous versions of deeply nested state does not mutate state returned by getState', () => {
+test('mutating previous versions of nested state does not mutate state returned by getState', () => {
   const store = createStore({ amount: { value: 1, currency: 'GBP' } }, setState => ({
     increment () {
       setState(state => ({
@@ -179,7 +179,7 @@ test('changes to initialState does not mutate state', () => {
   expect(store.getState()).toMatchObject({ amount: 1 })
 })
 
-test('changes to deeply nested initialState does not mutate state', () => {
+test('changes to nested initialState does not mutate state', () => {
   const initialState = { amount: { value: 1, currency: 'GBP' } }
 
   const store = createStore(initialState, setState => ({}))
@@ -187,4 +187,23 @@ test('changes to deeply nested initialState does not mutate state', () => {
   initialState.amount.value = 1000
 
   expect(store.getState()).toMatchObject({ amount: { value: 1, currency: 'GBP' } })
+})
+
+test('mutating state inside model does not mutate old state', () => {
+  const store = createStore({ things: [] }, setState => ({
+    increment () {
+      setState(state => {
+        state.things.push('abc')
+
+        return state
+      })
+    }
+  }))
+
+  const stateBefore = store.getState()
+
+  store.increment()
+
+  expect(stateBefore).toMatchObject({ things: [] })
+  expect(store.getState()).toMatchObject({ things: ['abc'] })
 })
