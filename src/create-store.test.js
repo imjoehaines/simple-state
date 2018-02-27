@@ -111,3 +111,20 @@ test('changes to state by model does not mutate initialState', () => {
 
   expect(initialState).toMatchObject({ amount: 1 })
 })
+
+test('changes to state by model does not mutate previous versions of state', () => {
+  const store = createStore({ amount: 1 }, setState => ({
+    increment () {
+      setState(state => ({ ...state, amount: state.amount + 1 }))
+    }
+  }))
+
+  const stateBefore = store.getState()
+
+  store.increment()
+
+  const stateAfter = store.getState()
+
+  expect(stateBefore).toMatchObject({ amount: 1 })
+  expect(stateAfter).toMatchObject({ amount: 2 })
+})
