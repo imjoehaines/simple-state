@@ -1,10 +1,14 @@
-import clone from 'lodash.clonedeep'
-import deepFreeze from 'deep-freeze'
-
 export default (initialState, modelConstructor) => {
   let listeners = []
 
-  let state = deepFreeze(clone(initialState))
+  let state = initialState
+
+  if (process.env.NODE_ENV !== 'production') {
+    const clone = require('lodash.clonedeep')
+    const deepFreeze = require('deep-freeze')
+
+    state = deepFreeze(clone(initialState))
+  }
 
   const model = modelConstructor(fn => { state = fn(state) })
 
