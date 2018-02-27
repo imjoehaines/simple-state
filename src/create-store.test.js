@@ -26,7 +26,7 @@ test('getState returns a state object', () => {
   expect(store.getState()).toMatchObject({ no: 'state', here: 'at all' })
 })
 
-test('it accepts an event type and calls the appropriate model function', () => {
+test('it exports all of the model functions as actions', () => {
   const store = createStore({ amount: 1 }, setState => ({
     increment () {
       setState(state => ({ ...state, amount: state.amount + 1 }))
