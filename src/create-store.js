@@ -1,7 +1,9 @@
+import clone from 'lodash.clonedeep'
+
 export default (initialState, modelConstructor) => {
   let listeners = []
 
-  let state = initialState
+  let state = clone(initialState)
 
   const model = modelConstructor(fn => { state = fn(state) })
 
@@ -16,7 +18,7 @@ export default (initialState, modelConstructor) => {
 
   return {
     ...types,
-    getState: () => state,
+    getState: () => clone(state),
     listen: listener => listeners.push(listener)
   }
 }
