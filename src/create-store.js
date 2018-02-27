@@ -5,12 +5,10 @@ export default (initialState, modelConstructor) => {
 
   const model = modelConstructor(fn => { state = fn(state) })
 
-  const dispatch = (type, payload) => model[type](payload)
-
   const types = Object.keys(model).reduce((types, type) => ({
     ...types,
     [type]: payload => {
-      dispatch(type, payload)
+      model[type](payload)
 
       listeners.forEach(listener => listener())
     }
