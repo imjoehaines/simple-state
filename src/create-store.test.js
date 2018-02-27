@@ -95,3 +95,19 @@ test('changes to the store can be listened for by multiple listeners', done => {
     store.increment()
   }
 })
+
+test('changes to state by model does not mutate initialState', () => {
+  const initialState = { amount: 1 }
+
+  const store = createStore(initialState, setState => ({
+    increment () {
+      setState(state => ({ ...state, amount: state.amount + 1 }))
+    }
+  }))
+
+  store.increment()
+
+  expect(store.getState()).toMatchObject({ amount: 2 })
+
+  expect(initialState).toMatchObject({ amount: 1 })
+})
