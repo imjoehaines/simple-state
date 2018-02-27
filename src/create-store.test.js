@@ -10,7 +10,7 @@ test('it returns a getState function', () => {
   expect(store.getState).toBeInstanceOf(Function)
 })
 
-test('it returns a function for each type from the model', () => {
+test('it returns a function for each action from the model', () => {
   const store = createStore({ amount: 1 }, setState => ({
     increment () {
       setState(state => ({ ...state, amount: state.amount + 1 }))

@@ -12,17 +12,17 @@ export default (initialState, modelConstructor) => {
 
   const model = modelConstructor(fn => { state = fn(state) })
 
-  const types = Object.keys(model).reduce((types, type) => ({
-    ...types,
-    [type]: payload => {
-      model[type](payload)
+  const actions = Object.keys(model).reduce((actions, action) => ({
+    ...actions,
+    [action]: payload => {
+      model[action](payload)
 
       listeners.forEach(listener => listener())
     }
   }), {})
 
   return {
-    ...types,
+    ...actions,
     getState: () => state,
     listen: listener => listeners.push(listener)
   }
