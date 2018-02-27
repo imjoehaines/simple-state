@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "Unlicense",
+  "scripts": {
+    "test": "jest"
+  },
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.40",
