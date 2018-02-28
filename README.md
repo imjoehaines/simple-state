@@ -5,9 +5,9 @@ Simple state management for JavaScript applications.
 ## Installation
 
 ```sh
-$ yarn add simple-state
+$ yarn add @imjoehaines/simple-state
 # OR
-$ npm install simple-state
+$ npm install @imjoehaines/simple-state
 ```
 
 ## Usage
