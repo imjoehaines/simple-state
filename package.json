@@ -1,17 +1,20 @@
 {
-  "name": "event-state",
-  "version": "1.0.0",
+  "name": "simple-state",
+  "version": "0.1.0",
   "main": "index.js",
   "license": "Unlicense",
   "scripts": {
+    "build": "babel src/create-store.js --minified -o dist.js",
     "test": "jest",
-    "benchmark": "benchr benchmark.js -pPv --require @babel/register"
+    "benchmark": "benchr benchmark.js -pPv --require @babel/register",
+    "prepublish": "yarn build"
   },
   "dependencies": {
     "deep-freeze": "^0.0.1",
     "lodash.clonedeep": "^4.5.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.40",
     "@babel/core": "^7.0.0-beta.40",
     "@babel/preset-env": "^7.0.0-beta.40",
     "@babel/register": "^7.0.0-beta.40",
