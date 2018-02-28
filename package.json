@@ -1,6 +1,9 @@
 {
   "name": "simple-state",
-  "version": "0.1.0",
+  "version": "0.0.0",
+  "description": "Simple JavaScript state management",
+  "repository": "git@github.com:imjoehaines/simple-state.git",
+  "author": "Joe Haines <hello@joehaines.co.uk>",
   "main": "index.js",
   "license": "Unlicense",
   "scripts": {
